@@ -1,0 +1,15 @@
+<% if flash[:notice] %>
+	<p class='notice'><%= flash[:notice] %></p>
+<% end %>
+<h2>Booked Flight</h2>
+<h3>FROM <%= @flight.start_airport.name %> TO <%= @flight.end_airport.name %></h3>
+<h4>Flight date: <%= I18n.l(@flight.start_datetime, format: :long) %></h4>
+<div class='list-container'>
+	<p>Passengers:</p>
+	<ul class= 'passenger-list'>
+		<% @passengers.each do |passenger| %>
+			<li><%= passenger.name %></li>
+		<% end %>
+	</ul>
+</div>
+

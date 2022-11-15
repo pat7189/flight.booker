@@ -1,0 +1,15 @@
+<div class='form-container'>
+	<%= form_with url: new_booking_url, method: :get do |form| %>
+		<% @flights.each do |flight| %>
+			<%= form.radio_button :flight_id, flight.id  %>
+			<%= form.label :flight, "FROM #{flight.start_airport.name} TO #{flight.end_airport.name}" %>
+			<ul>
+				<li>Flight date: <%= I18n.l(flight.start_datetime, format: :long) %></li>
+				<li>Flight duration: <%= distance_of_time_in_words( 0, flight.flight_duration_minutes.minutes ) %></li>
+				<li>Number of passengers: <%= @number_of_passengers %></li>
+			</ul>
+			<%= form.hidden_field :number_of_passengers, value: @number_of_passengers %>
+		<% end %>
+		<%= form.submit "Book flight" %>
+	<% end %>
+</div>

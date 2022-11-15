@@ -1,0 +1,12 @@
+<%= render 'search_form' %>
+<% if @flights.present? %>
+	<%= render 'selection_form' %>
+<% else %>
+	<% if flash[:notice]%>
+		<% flash.each do |type, msg| %>
+			<div>
+				<%= msg %>
+			</div>
+		<% end %>
+	<% end%>
+<% end %>

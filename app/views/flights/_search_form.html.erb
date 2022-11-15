@@ -1,0 +1,20 @@
+<div class='form-container'>
+	<%= form_with model: @flight_search, url: "/", method: :get do |form| %>
+		<% if @flight_search.errors.any? %>
+			<ul>
+				<% @flight_search.errors.full_messages.each do |msg| %>
+					<li class='error-msg'><%= msg %></li>
+				<% end %>
+			</ul>
+		<% end %>
+		<%= form.label :start_airport, "From:" %>
+		<%= form.collection_select :start_airport_id, Airport.order(:name), :id, :name %>
+		<%= form.label :end_airport, "To:" %>
+		<%= form.collection_select :end_airport_id, Airport.order(:name), :id, :name %>
+		<%= form.label :number_of_passengers, 'Passengers' %>
+		<%= form.number_field :number_of_passengers, in: 1..4, placeholder: 'number of passengers' %>
+		<%= form.label :date, 'Date:' %>
+		<%= form.date_field :date, start_year: Date.today.year, selected: Date.today, as: :date, class: 'date' %>
+		<%= form.submit "Search" %>
+	<% end %>
+</div>

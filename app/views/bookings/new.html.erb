@@ -1,0 +1,23 @@
+<h3>FROM <%= @flight.start_airport.name %> TO <%= @flight.end_airport.name %></h3>
+<h4>Flight date: <%= I18n.l(@flight.start_datetime, format: :long) %></h4>
+<div class='form-container'>
+	<%= form_with model: @booking do |form|%>
+		<%= form.label :flight_id, "Flight ID: " %>
+		<%= form.number_field :flight_id, value: @flight.id, readonly: true %>
+		<%= form.fields_for :passengers  do |passenger_form| %>
+			<div class='nested-form-container'>
+				<p>Passenger:</p>
+				<br>
+				<%= passenger_form.label :name, 'Name: ' %>
+				<%= passenger_form.text_field :name, :required => true %>
+				<br>
+				<%= passenger_form.label :email, 'Email: ' %>
+				<%= passenger_form.email_field :email, :required => true %>
+				<br>
+			</div>
+		<% end %>
+		<br>
+		<%= form.submit "Book flight" %>
+	<% end %>
+</div>
+
